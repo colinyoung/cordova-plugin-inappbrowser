@@ -389,7 +389,7 @@ public class InAppBrowser extends CordovaPlugin {
 
         if (!url.startsWith("http") && !url.startsWith("file:")) {
             this.inAppWebView.loadUrl("http://" + url);
-        } else if (url.startsWith("gap-iab://close") {
+        } else if (url.startsWith("gap-iab://close")) {
             closeDialog();
         } else {
             this.inAppWebView.loadUrl(url);
