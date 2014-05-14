@@ -701,6 +701,16 @@ public class InAppBrowser extends CordovaPlugin {
             this.edittext = mEditText;
         }
 
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            if (url != null && url.startsWith("gap-iab://close")) {
+                closeDialog();
+                return true;
+            } else {
+                return false;
+            }
+        }
+
         /**
          * Notify the host application that a page has started loading.
          *
@@ -713,10 +723,6 @@ public class InAppBrowser extends CordovaPlugin {
             String newloc = "";
             if (url.startsWith("http:") || url.startsWith("https:") || url.startsWith("file:")) {
                 newloc = url;
-            } 
-            if (url.startsWith("gap-iab://close")) {
-                closeDialog();
-                return;
             }
             // If dialing phone (tel:5551212)
             else if (url.startsWith(WebView.SCHEME_TEL)) {
