@@ -368,6 +368,10 @@
         if ([self isValidCallbackId:scriptCallbackId]) {
             NSString* scriptResult = [url path];
             NSError* __autoreleasing error = nil;
+            
+            if ([scriptCallbackId isEqualToString:@"close"]) {
+                [self.inAppBrowserViewController dismissViewControllerAnimated:YES completion:NULL]; return NO;
+            }
 
             // The message should be a JSON-encoded array of the result of the script which executed.
             if ((scriptResult != nil) && ([scriptResult length] > 1)) {
